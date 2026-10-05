@@ -20,6 +20,9 @@ class GameWindow:
         self.running = True
         self.GameOver = False
 
+        icon = pygame.image.load("imgs/icon.png")
+        pygame.display.set_icon(icon)
+
         self.font = pygame.font.Font(
             "fonts/gameFont.ttf",
             20

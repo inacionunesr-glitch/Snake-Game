@@ -15,6 +15,8 @@ class ConfigWindow:
         self.root.geometry("450x450")
         self.root.resizable(False, False)
 
+        self.root.iconbitmap("imgs/icon.ico")
+
         self.font = ctk.CTkFont(
             family="Super Mario Bros. NES",
             size=16

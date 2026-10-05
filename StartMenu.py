@@ -11,6 +11,9 @@ class MainStartMenu:
         self.GameStarted = False
         self.ConfigOpened = False
 
+        icon = pygame.image.load("imgs/icon.png")
+        pygame.display.set_icon(icon)
+
         self.screen = pygame.display.set_mode((450, 450))
         pygame.display.set_caption("Snake Game")
 

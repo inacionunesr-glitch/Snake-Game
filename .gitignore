@@ -1,21 +1,30 @@
-# Python cache
-__pycache__/
+Python cache
+
+pycache/
 *.py[cod]
 *$py.class
 
-# Virtual environment
+Virtual environment
+
 .venv/
 venv/
 env/
 
-# IDE
+IDE
+
 .vscode/
 .idea/
 
-# Build
+Build
+
 build/
 dist/
 *.spec
 
-# Logs
+Logs
+
 *.log
+
+Data
+
+data/
