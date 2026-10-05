@@ -23,3 +23,5 @@ dist/
 # Data
 data/
 data/configs.json
+
+*.zip
