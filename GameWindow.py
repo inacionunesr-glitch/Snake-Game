@@ -4,6 +4,7 @@ import random
 from Player import Player
 from Fruit import Fruit
 
+from SoundManager import SoundManager
 
 class GameWindow:
 
@@ -42,6 +43,8 @@ class GameWindow:
         self.move_timer = 0
         self.move_delay = 120
 
+        self.sound_manager = SoundManager()
+
     def run(self):
 
         while self.running:
@@ -56,6 +59,8 @@ class GameWindow:
                     self.running = False
 
             self.screen.fill("black")
+
+            self.sound_manager.play_music()
 
             # Input
             keys = pygame.key.get_pressed()
@@ -96,23 +101,28 @@ class GameWindow:
                 # Colisão com borda
                 if self.player.collided_border():
 
+                    self.sound_manager.stop_music()
                     self.GameOver = True
                     self.running = False
 
                 # Colisão com cauda
                 elif self.player.collided_body():
 
+                    self.sound_manager.stop_music()
                     self.GameOver = True
                     self.running = False
 
                 # Colisão com fruta
                 elif self.player.get_rect().colliderect(
+
                     self.fruit.get_rect()
                 ):
 
+                    self.sound_manager.play_eat_sound()
                     self.points += 1
                     self.player.lenght += 1
                     self.fruit = None
+                    
 
             # Desenhar fruta
             if self.fruit is not None:

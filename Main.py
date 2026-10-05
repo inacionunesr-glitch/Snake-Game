@@ -2,6 +2,7 @@ import pygame
 
 from StartMenu import MainStartMenu
 from GameWindow import GameWindow
+from ConfigWindow import ConfigWindow
 
 
 if __name__ == "__main__":
@@ -10,20 +11,33 @@ if __name__ == "__main__":
 
     while running:
 
-        # Menu
         mainMenu = MainStartMenu()
         mainMenu.run()
 
-        # Se apertou QUIT
-        if not mainMenu.IsGameStarted():
-            running = False
-            break
+        # Se o usuário fechou o Pygame
+        if not mainMenu.running:
 
-        # Jogo
-        gameWindow = GameWindow()
-        gameWindow.run()
+            if not mainMenu.IsGameStarted() and not mainMenu.IsConfigOpened():
 
-        # Se o jogo terminou por colisão,
-        # o loop volta para o StartMenu
+                running = False
+                break
+
+        # Abriu configurações
+        if mainMenu.IsConfigOpened():
+
+            configWindow = ConfigWindow()
+            configWindow.run()
+
+            # Depois de fechar a configuração,
+            # o while volta para o começo e cria o menu novamente.
+            continue
+
+        # Começou o jogo
+        if mainMenu.IsGameStarted():
+
+            gameWindow = GameWindow()
+            gameWindow.run()
+
+            continue
 
     pygame.quit()

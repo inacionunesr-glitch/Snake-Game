@@ -9,6 +9,7 @@ class MainStartMenu:
 
         self.running = True
         self.GameStarted = False
+        self.ConfigOpened = False
 
         self.screen = pygame.display.set_mode((450, 450))
         pygame.display.set_caption("Snake Game")
@@ -28,11 +29,15 @@ class MainStartMenu:
         )
 
         self.play_button = pygame.Rect(
-            125, 180, 200, 60
+            125, 160, 200, 60
+        )
+
+        self.config_button = pygame.Rect(
+            125, 235, 200, 60
         )
 
         self.quit_button = pygame.Rect(
-            125, 260, 200, 60
+            125, 310, 200, 60
         )
 
     def run(self):
@@ -42,6 +47,7 @@ class MainStartMenu:
             for event in pygame.event.get():
 
                 if event.type == pygame.QUIT:
+
                     self.running = False
 
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -51,7 +57,12 @@ class MainStartMenu:
                         self.GameStarted = True
                         self.running = False
 
-                    if self.quit_button.collidepoint(event.pos):
+                    elif self.config_button.collidepoint(event.pos):
+
+                        self.ConfigOpened = True
+                        self.running = False
+
+                    elif self.quit_button.collidepoint(event.pos):
 
                         self.running = False
 
@@ -89,6 +100,24 @@ class MainStartMenu:
 
             pygame.draw.rect(
                 self.screen,
+                "blue",
+                self.config_button
+            )
+
+            config_text = self.font.render(
+                "CONFIG",
+                True,
+                "white"
+            )
+
+            config_rect = config_text.get_rect(
+                center=self.config_button.center
+            )
+
+            self.screen.blit(config_text, config_rect)
+
+            pygame.draw.rect(
+                self.screen,
                 "red",
                 self.quit_button
             )
@@ -110,5 +139,7 @@ class MainStartMenu:
             self.clock.tick(60)
 
     def IsGameStarted(self):
-
         return self.GameStarted
+
+    def IsConfigOpened(self):
+        return self.ConfigOpened
